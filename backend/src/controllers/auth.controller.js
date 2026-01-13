@@ -1,0 +1,54 @@
+import bcrypt from "bcrypt";
+import { User } from "../models/user.model.js";
+import { generateToken } from "../utils/utils.js";
+
+export const signup = async (req, res) => {
+  const { fullName, email, password } = req.body;
+  try {
+    if (!fullName || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters long" });
+    }
+
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ message: "User already exist" });
+    }
+
+    //hashing password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const newUser = await User.create({
+      fullName,
+      email,
+      password: hashedPassword,
+    });
+
+    if (!newUser) {
+      return res.status(500).json({
+        message: "Failed to create the user",
+      });
+    }
+
+    generateToken(newUser._id, res);
+    await newUser.save();
+
+    return res.status(201).json({
+      _id: newUser._id,
+      fullname: newUser.fullName,
+      email: newUser.email,
+      profilePic: newUser.profilePic,
+      message: "Signup successful",
+    });
+  } catch (error) {
+    console.log("Error in signup controller", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+export const login = async (req, res) => {};
+export const logout = async (req, res) => {};
