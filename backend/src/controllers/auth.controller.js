@@ -87,4 +87,17 @@ export const login = async (req, res) => {
     });
   }
 };
-export const logout = async (req, res) => {};
+export const logout = async (req, res) => {
+  try {
+    res.cookie("jwt", "", {
+      maxAge: "0",
+    });
+
+    return res.status(200).json({
+      message: "Logout successfully",
+    });
+  } catch (error) {
+    console.log("error in logout auth controller : ", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
