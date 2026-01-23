@@ -5,14 +5,16 @@ import { useAuthStore } from "../store/useAuthStore";
 const Navbar = () => {
   const { authUser, logout } = useAuthStore();
 
-  console.log("authUser", authUser);
+  // console.log("authUser", authUser);
 
   return (
-    <div className="px-2 py-6 bg-blue-400 flex justify-between text-xl gap-5">
-      <Link to="/">
+    <div className="px-2 py-3 bg-blue-400 flex justify-between text-xl gap-5">
+      {/* <Link to="/">
         <div>Home</div>
-      </Link>
-      <span>{authUser ? `${authUser.fullName} is loggedIn ` : "Home"}</span>
+      </Link> */}
+      <span className=" py-1 px-2 bg-blue-200 rounded-xl">
+        {authUser ? `${authUser.fullName} is loggedIn ` : "Home"}
+      </span>
 
       {authUser ? (
         <button
