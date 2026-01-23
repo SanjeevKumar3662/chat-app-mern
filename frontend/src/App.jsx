@@ -9,12 +9,25 @@ import SettingsPage from "./pages/SettingsPage";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
 
+import { useSocketStore } from "./store/useSocketStore";
+
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  const { connectSocket, disconnectSocket } = useSocketStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  useEffect(() => {
+    if (authUser?._id) {
+      connectSocket(authUser._id);
+    }
+
+    return () => disconnectSocket();
+  }, [authUser, connectSocket, disconnectSocket]);
+
+  // socket.emit("send_message", { name: "kumar", message: "night night" });
 
   // console.log("AuthUser :", authUser);
 
@@ -28,7 +41,7 @@ const App = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route
           path="/"
