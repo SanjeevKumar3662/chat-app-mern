@@ -1,5 +1,5 @@
-import { configDotenv } from "dotenv";
-configDotenv();
+import "dotenv/config";
+
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -24,8 +24,8 @@ const io = new Server(server, {
 
 const PORT = process.env.PORT;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 app.use(
   cors({
@@ -38,13 +38,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
 
 io.on("connection", (socket) => {
-  console.log("user connected", socket.id);
+  // console.log("user connected", socket.id);
 
   const userId = socket.handshake.query.userId;
 
   if (userId) {
     socket.join(userId);
-    console.log("user joined a room", socket.id);
+    // console.log("user joined a room", socket.id);
   }
 
   socket.on("disconnect", () => {
