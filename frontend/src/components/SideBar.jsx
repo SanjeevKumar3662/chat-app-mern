@@ -16,7 +16,7 @@ export const SideBar = ({ setChatTarget }) => {
   }, [getUsers, setChatTarget, users]);
 
   // console.log("users:", users);
-  console.log("Sidebar rendered");
+  // console.log("Sidebar rendered");
   return (
     <section className="flex-1 bg-linear-to-r from-slate-900 to-slate-700">
       <Navbar />
