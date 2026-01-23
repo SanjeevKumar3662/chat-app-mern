@@ -41,7 +41,15 @@ A full-stack **real-time chat application** built using the **MERN stack**, feat
 
 ---
 
-## 📁 Project Structure
+## Images
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+
+---
+
+### Project Structure
 
 <pre>chat_app_mern/
 ├── backend/
