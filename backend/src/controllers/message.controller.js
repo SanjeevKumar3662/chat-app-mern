@@ -1,3 +1,4 @@
+import { io } from "../index.js";
 import { Message } from "../models/message.model.js";
 import { User } from "../models/user.model.js";
 import cloudinary from "../utils/cloudinary.js";
@@ -21,7 +22,8 @@ export const getUsersForSidebar = async (req, res) => {
 export const getMessages = async (req, res) => {
   try {
     const userToChatId = req.params.id;
-    const myId = req.user.userId;
+    const myId = req.user._id;
+    // console.log(myId);
 
     const messages = await Message.find({
       $or: [
@@ -52,7 +54,7 @@ export const sendMessage = async (req, res) => {
       imageUrl = (await uploadResponse).secure_url;
     }
 
-    const newMessge = await Message.create({
+    const newMessage = await Message.create({
       senderId,
       receiverId,
       text,
@@ -60,8 +62,9 @@ export const sendMessage = async (req, res) => {
     });
 
     // a todo : add socket.io here
+    io.to(receiverId.toString()).emit("newMessage", newMessage);
 
-    return res.status(201).json(newMessge);
+    return res.status(201).json(newMessage);
   } catch (error) {
     console.log("error in sendMessage message controller :", error);
 
