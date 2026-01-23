@@ -25,8 +25,13 @@ export const useMessageStore = create((set) => {
         set((state) => ({ messages: [...state.messages, res.data] }));
         toast.success("Message Sent");
       } catch (error) {
-        toast.error(error.response.error.message);
-        console.log("error in sendMessage", error.response.error.message);
+        console.log("sendMessage error:", error);
+
+        toast.error(
+          error.response?.data?.message ||
+            error.message ||
+            "Failed to send message"
+        );
       }
     },
     getMessage: async (senderId) => {
