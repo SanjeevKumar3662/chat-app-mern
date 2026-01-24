@@ -19,7 +19,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173",
-      "https://chat-app-mern-backend-l5bi.onrender.com",
+      "https://chat-app-mern-frontend-chi.vercel.app",
     ],
     credentials: true,
   },
