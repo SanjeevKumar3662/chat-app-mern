@@ -7,7 +7,7 @@ export const useSocketStore = create((set, get) => ({
   connectSocket: (userId) => {
     if (get().socket) return;
 
-    const socket = io("http://localhost:3000", {
+    const socket = io(`${import.meta.env.VITE_SERVER_URI}`, {
       query: { userId },
       // withCredentials: true,
     });
