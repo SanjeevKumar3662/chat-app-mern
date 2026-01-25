@@ -110,34 +110,56 @@ export const Chat = ({ chatTarget, onBack }) => {
                 <img
                   src={message.image}
                   alt="sent"
-                  className="max-w-100 rounded-md mt-1"
+                  className="mt-1 rounded-md max-w-70 sm:max-w-[320px] md:max-w-85 w-full object-contain"
                 />
               )}
             </li>
           ))}
         </ul>
 
-        {/* 👇 MUST be inside the scroll container */}
         <div ref={bottomRef} />
       </div>
 
-      <form className="sticky  bottom-0  border p-2 bg-gray-800 ">
-        <div className=" flex gap-2 ">
+      <form
+        onSubmit={handleMessageSubmit}
+        className="sticky bottom-0 bg-gray-800 border-t p-2"
+      >
+        <div className="flex items-center gap-2">
+          {/* Image picker */}
+          <label className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-md bg-gray-700 hover:bg-gray-600">
+            <img className="min-w-5" src="/image-picker.png" alt="" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
+          </label>
+
+          {/* Text input */}
           <input
-            onChange={(e) => setMessage({ ...message, text: e.target.value })}
-            value={message.text}
-            className=" flex-4 rounded-md text-white bg-gray-600"
             type="text"
+            placeholder="Type a message..."
+            value={message.text}
+            onChange={(e) => setMessage({ ...message, text: e.target.value })}
+            className="
+        flex-1 px-3 py-2 rounded-md
+        bg-gray-600 text-white
+        placeholder-gray-300
+        focus:outline-none focus:ring-2 focus:ring-green-400
+      "
           />
-          <input
-            className=" bg-green-300 max-w-50 rounded-md"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
+
+          {/* Send button */}
           <button
-            onClick={handleMessageSubmit}
-            className="flex-1 bg-green-400 active:bg-green-300 p-2 rounded-md"
+            type="submit"
+            disabled={!message.text && !message.image}
+            className="
+        px-4 py-2 rounded-md
+        bg-green-500 text-white font-medium
+        disabled:opacity-50 disabled:cursor-not-allowed
+        active:bg-green-400
+      "
           >
             Send
           </button>
