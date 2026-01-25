@@ -18,10 +18,11 @@ const userSchema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
-      default: "",
+      default:
+        "https://res.cloudinary.com/dwccikzgp/image/upload/v1769278865/white-user-member-guest-icon-png-image-701751695037005zdurfaim0y_xqnoyx.png",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const User = mongoose.model("User", userSchema);
