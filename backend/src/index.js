@@ -43,7 +43,7 @@ app.use(
 );
 
 // health check
-app.get("api/health", (req, res) => {
+app.get("/api/health", (req, res) => {
   res.status(200).json({
     status: "ok",
     uptime: process.uptime(),
