@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useMessageStore } from "../store/useMessageStore";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 import { useFeatureStore } from "../store/useFeatureStore";
 
 export const SideBar = ({ setChatTarget }) => {
   const [users, setUsers] = useState(null);
   const { getUsers } = useMessageStore();
 
-  const { showSettings, toggleShowSettings } = useFeatureStore();
+  const { showSettings, setShowSettings } = useFeatureStore();
 
   useEffect(() => {
     if (users !== null) return;
@@ -33,7 +33,7 @@ export const SideBar = ({ setChatTarget }) => {
               key={user._id}
               onClick={() => {
                 setChatTarget(user);
-                if (showSettings) toggleShowSettings();
+                if (showSettings) setShowSettings(false);
               }}
               className="flex gap-2 items-center bg-blue-400 active:bg-blue-300 p-2 rounded-md cursor-pointer"
             >

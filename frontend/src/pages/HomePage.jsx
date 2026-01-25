@@ -2,12 +2,12 @@ import { useState } from "react";
 import { SideBar } from "../components/SideBar";
 import { Chat } from "../components/Chat";
 import SettingsPage from "./SettingsPage";
-// import { useFeatureStore } from "../store/useFeatureStore";
+import { useFeatureStore } from "../store/useFeatureStore";
 import Navbar from "../components/Navbar";
 
 function HomePage() {
   const [chatTarget, setChatTarget] = useState(null);
-  // const { showSettings } = useFeatureStore();
+  const { showSettings } = useFeatureStore();
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
@@ -31,7 +31,11 @@ function HomePage() {
         ${chatTarget ? "block" : "hidden md:block"}
       `}
         >
-          <Chat chatTarget={chatTarget} onBack={() => setChatTarget(null)} />
+          {!showSettings ? (
+            <Chat chatTarget={chatTarget} onBack={() => setChatTarget(null)} />
+          ) : (
+            <SettingsPage />
+          )}
         </div>
       </div>
     </div>

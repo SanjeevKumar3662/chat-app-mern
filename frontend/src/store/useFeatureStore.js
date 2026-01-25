@@ -4,10 +4,11 @@ import { create } from "zustand";
 
 export const useFeatureStore = create((set) => ({
   showSettings: false,
-  toggleShowSettings: () => {
-    set((state) => ({
-      showSettings: !state.showSettings,
-    }));
+  setShowSettings: (bool) => {
+    // bool not true or false then return
+    if (!(bool === true || bool === false)) return;
+
+    set({ showSettings: bool });
   },
   //for uploading image
   handleImageChange: (e) => {

@@ -5,7 +5,8 @@ import { useFeatureStore } from "../store/useFeatureStore";
 
 const Navbar = () => {
   const { authUser } = useAuthStore();
-  const { toggleShowSettings } = useFeatureStore();
+  const { showSettings, setShowSettings } = useFeatureStore();
+  // const {  setShowSettings } = useFeatureStore();
 
   // console.log("authUser", authUser);
 
@@ -36,7 +37,7 @@ const Navbar = () => {
         {authUser ? (
           <button
             className="text-xl sm:text-2xl cursor-pointer hover:rotate-90 transition-transform duration-200"
-            onClick={toggleShowSettings}
+            onClick={() => setShowSettings(!showSettings)}
           >
             ⚙️
           </button>
