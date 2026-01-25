@@ -3,7 +3,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { useFeatureStore } from "../store/useFeatureStore";
 
 export default function SettingsPage() {
-  const { authUser, updateUser } = useAuthStore();
+  const { authUser, updateUser, logout } = useAuthStore();
   const { handleImageChange } = useFeatureStore();
   console.log("authUser", authUser);
 
@@ -18,7 +18,7 @@ export default function SettingsPage() {
     }
   };
   return (
-    <div className=" bg-linear-to-r from-slate-900 to-slate-700 flex-3    justify-between overflow-y-auto">
+    <div className=" bg-linear-to-r from-slate-900 to-slate-700 flex-3    justify-between h-full">
       {/* this is the top bio section */}
       <section className="h-50 flex border border-white items-center justify-around">
         <div className=" flex flex-col  gap-3 p-4 ">
@@ -41,6 +41,9 @@ export default function SettingsPage() {
         <h1 className="  capitalize text-2xl text-white">
           {authUser.fullName}
         </h1>
+        <button onClick={logout} className="bg-red-800 px-4 py-2 rounded-md">
+          Logout
+        </button>
       </section>
     </div>
   );
