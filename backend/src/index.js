@@ -27,7 +27,7 @@ const io = new Server(server, {
   },
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
@@ -61,9 +61,9 @@ io.on("connection", (socket) => {
   });
 });
 
+await connectDB();
 server.listen(PORT, () => {
   console.log("Server running on", PORT);
-  connectDB();
 });
 
 export { io };
