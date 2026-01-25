@@ -10,7 +10,7 @@ const Navbar = () => {
   // console.log("authUser", authUser);
 
   return (
-    <div className="px-2 py-3 bg-blue-800 flex justify-between text-xl gap-5">
+    <div className="px-2 py-3 bg-blue-800 flex justify-between items-center text-xl gap-5">
       {/* <span className=" py-1 px-2 bg-blue-200 rounded-xl">
         {authUser ? `${authUser.fullName}${showSettings}` : "Home"}
       </span> */}
@@ -18,6 +18,8 @@ const Navbar = () => {
       <div className="">
         <img className="w-12 h-12 rounded-full" src={authUser?.profilePic} />
       </div>
+
+      <img className="h-10   " src="/chat-with-sanjeev-icon.png" alt="logo" />
 
       {authUser ? (
         <button
