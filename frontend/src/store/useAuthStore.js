@@ -57,4 +57,23 @@ export const useAuthStore = create((set) => ({
       console.log("login error :", error.response.error.message);
     }
   },
+
+  updateUser: async (data) => {
+    if (!data || Object.keys(data).length === 0) {
+      toast.error("updateUser failed: input data is empty");
+      return;
+    }
+    try {
+      const res = await axiosInstance.patch("/user/me", data);
+      console.log("res form updateUser :", res.data);
+      set({ authUser: res.data });
+
+      return res.data;
+    } catch (error) {
+      console.log("Error in UpdateUser:", error);
+      toast.error(error.response?.data?.message || "Error in updateUser");
+
+      throw error;
+    }
+  },
 }));
