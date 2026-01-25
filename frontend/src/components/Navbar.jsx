@@ -10,31 +10,44 @@ const Navbar = () => {
   // console.log("authUser", authUser);
 
   return (
-    <div className="px-2 py-3 bg-blue-800 flex justify-between items-center text-xl gap-5">
-      {/* <span className=" py-1 px-2 bg-blue-200 rounded-xl">
-        {authUser ? `${authUser.fullName}${showSettings}` : "Home"}
-      </span> */}
-
-      <div className="">
-        <img className="w-12 h-12 rounded-full" src={authUser?.profilePic} />
+    <div className="px-2 sm:px-4 py-3 bg-blue-800 flex items-center text-xl  ">
+      {/* Left section */}
+      <div className="flex-1 flex items-center gap-2">
+        {authUser && (
+          <img
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
+            src={authUser.profilePic}
+            alt="profile"
+          />
+        )}
       </div>
 
-      <img className="h-10   " src="/chat-with-sanjeev-icon.png" alt="logo" />
+      {/* Center logo */}
+      <div className="flex-1 flex justify-center">
+        <img
+          className="h-7 sm:h-9 md:h-10 object-contain"
+          src="/chat-with-sanjeev-icon.png"
+          alt="logo"
+        />
+      </div>
 
-      {authUser ? (
-        <button
-          className=" text-2xl  cursor-pointer active: hover:animate-spin   rounded-full"
-          onClick={toggleShowSettings}
-        >
-          ⚙️
-        </button>
-      ) : (
-        <Link to="/login">
-          <button className=" bg-violet-600 rounded-md" text-white px-2 py-1>
-            login
+      {/* Right section */}
+      <div className="flex-1 flex justify-end items-center">
+        {authUser ? (
+          <button
+            className="text-xl sm:text-2xl cursor-pointer hover:rotate-90 transition-transform duration-200"
+            onClick={toggleShowSettings}
+          >
+            ⚙️
           </button>
-        </Link>
-      )}
+        ) : (
+          <Link to="/login">
+            <button className="bg-violet-600 text-white px-3 py-1 rounded-md text-sm sm:text-base">
+              Login
+            </button>
+          </Link>
+        )}
+      </div>
     </div>
   );
 };

@@ -21,30 +21,26 @@ export const SideBar = ({ setChatTarget }) => {
   // console.log("users:", users);
   // console.log("Sidebar rendered");
   return (
-    <section className="flex-1 bg-linear-to-r from-slate-900 to-slate-700 overflow-y-auto">
-      <Navbar />
-      <ul className="flex flex-col p-3 gap-2">
+    <section className="flex-1 bg-linear-to-r from-slate-900 to-slate-700 h-full flex flex-col">
+      {/* Optional fixed header */}
+      {/* <Navbar /> */}
+
+      {/* Scrollable users list */}
+      <ul className="flex-1 flex flex-col p-3 gap-2 overflow-y-auto">
         {users &&
-          users.map((user) => {
-            return (
-              <li
-                onClick={() => {
-                  setChatTarget(user);
-                  if (showSettings) {
-                    toggleShowSettings();
-                  }
-                }}
-                className="flex gap-2 items-center bg-blue-400 active:bg-blue-300 p-2 rounded-md  cursor-pointer"
-                key={user._id}
-              >
-                <img
-                  className="w-12 h-12 rounded-full"
-                  src={user?.profilePic}
-                />{" "}
-                {user.fullName}
-              </li>
-            );
-          })}
+          users.map((user) => (
+            <li
+              key={user._id}
+              onClick={() => {
+                setChatTarget(user);
+                if (showSettings) toggleShowSettings();
+              }}
+              className="flex gap-2 items-center bg-blue-400 active:bg-blue-300 p-2 rounded-md cursor-pointer"
+            >
+              <img className="w-12 h-12 rounded-full" src={user?.profilePic} />
+              {user.fullName}
+            </li>
+          ))}
       </ul>
     </section>
   );

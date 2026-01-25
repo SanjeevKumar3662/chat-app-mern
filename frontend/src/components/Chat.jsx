@@ -4,7 +4,7 @@ import { useMessageStore } from "../store/useMessageStore";
 import { useAuthStore } from "../store/useAuthStore";
 import { useSocketStore } from "../store/useSocketStore";
 
-export const Chat = ({ chatTarget }) => {
+export const Chat = ({ chatTarget, onBack }) => {
   const { messages, getMessage, sendMessage, addMessage } = useMessageStore();
   const { authUser } = useAuthStore();
   const { socket } = useSocketStore();
@@ -72,43 +72,57 @@ export const Chat = ({ chatTarget }) => {
   };
   // console.log("messages", messages);
   // console.log("chatTarget", chatTarget);
+  if (!chatTarget) {
+    return (
+      <div className="flex items-center justify-center h-full text-gray-400">
+        Select a chat
+      </div>
+    );
+  }
 
   return (
-    <section className=" bg-linear-to-r from-slate-900 to-slate-700 flex-3 flex flex-col   justify-between overflow-y-auto">
-      <div className="sticky top-0">
-        <h1 className="text-2xl text-white bg-gray-600 p-1 text-center  ">
+    // <section className=" bg-linear-to-r from-slate-900 to-slate-700 flex-3 flex flex-col   justify-between overflow-y-auto">
+    <section className="bg-linear-to-r from-slate-900 to-slate-700 flex-3 flex flex-col h-full">
+      <div className="sticky top-0 bg-gray-600 p-1 flex justify-between ">
+        <h1 className="text-2xl text-white  text-center  px-3">
           {chatTarget?.fullName}
         </h1>
+        <button
+          onClick={onBack}
+          className="md:hidden  bg-gray-500 px-6 rounded-md text-white text-xl "
+        >
+          ←
+        </button>
       </div>
-      <div>
+      <div className="flex-1 overflow-y-auto px-2">
         <ul className="flex flex-col">
-          {messages &&
-            messages.map((message) => {
-              return (
-                <li
-                  key={message._id}
-                  className={` p-2  m-3 rounded-md  ${
-                    message.senderId === authUser._id
-                      ? "self-end bg-blue-400"
-                      : "self-start bg-gray-600 text-white"
-                  }`}
-                >
-                  {message.text && message.text}
-                  {message.image && (
-                    <img
-                      src={message.image}
-                      alt="sent"
-                      className="max-w-100 rounded-md mt-1"
-                    />
-                  )}
-                </li>
-              );
-            })}
+          {messages.map((message) => (
+            <li
+              key={message._id}
+              className={`p-2 m-3 rounded-md ${
+                message.senderId === authUser._id
+                  ? "self-end bg-blue-400"
+                  : "self-start bg-gray-600 text-white"
+              }`}
+            >
+              {message.text}
+              {message.image && (
+                <img
+                  src={message.image}
+                  alt="sent"
+                  className="max-w-100 rounded-md mt-1"
+                />
+              )}
+            </li>
+          ))}
         </ul>
-        <div ref={bottomRef}></div>
+
+        {/* 👇 MUST be inside the scroll container */}
+        <div ref={bottomRef} />
       </div>
-      <form>
-        <div className="sticky  bottom-0  border p-2 bg-gray-800 flex gap-2">
+
+      <form className="sticky  bottom-0  border p-2 bg-gray-800 ">
+        <div className=" flex gap-2 ">
           <input
             onChange={(e) => setMessage({ ...message, text: e.target.value })}
             value={message.text}
