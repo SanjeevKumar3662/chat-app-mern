@@ -10,6 +10,7 @@ import { Server } from "socket.io";
 
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
+import userRoutes from "./routes/user.route.js";
 import { connectDB } from "./db/db.js";
 
 const app = express();
@@ -38,11 +39,12 @@ app.use(
       "https://chat-app-mern-frontend-chi.vercel.app",
     ],
     credentials: true,
-  })
+  }),
 );
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
+app.use("/api/user", userRoutes);
 
 io.on("connection", (socket) => {
   // console.log("user connected", socket.id);
