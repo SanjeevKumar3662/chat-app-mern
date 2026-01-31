@@ -36,7 +36,12 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-800">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-800">
+      <img
+        src="/chat-with-sanjeev-icon.png"
+        className="max-md:max-w-[80%] "
+        alt=""
+      />
       <div className="border border-black w-100  flex justify-around flex-col p-5 gap-5 rounded-md bg-blue-300">
         <div className="flex justify-between gap-2 border border-black p-2 rounded-md">
           <label className="" htmlFor="fullName">
