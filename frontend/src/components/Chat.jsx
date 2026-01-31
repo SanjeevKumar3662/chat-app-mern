@@ -82,7 +82,7 @@ export const Chat = ({ chatTarget, onBack }) => {
 
   return (
     // <section className=" bg-linear-to-r from-slate-900 to-slate-700 flex-3 flex flex-col   justify-between overflow-y-auto">
-    <section className="bg-linear-to-r from-slate-900 to-slate-700  flex flex-1 flex-col h-full">
+    <section className="bg-linear-to-r from-slate-900 to-slate-700  flex flex-1 flex-col h-[92dvh]">
       <div className="sticky top-0 bg-gray-600 p-1 flex justify-between ">
         <h1 className="text-2xl text-white  text-center  px-3">
           {chatTarget?.fullName}
