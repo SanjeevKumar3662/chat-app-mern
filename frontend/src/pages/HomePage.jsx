@@ -10,7 +10,7 @@ function HomePage() {
   const { showSettings } = useFeatureStore();
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="h-screen flex flex-col ">
       <Navbar />
 
       <div className="flex flex-1 overflow-hidden">
