@@ -14,7 +14,7 @@ export const Chat = ({ chatTarget, onBack }) => {
   const bottomRef = useRef(null);
 
   useEffect(() => {
-    bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
+    bottomRef?.current?.scrollIntoView();
   }, [messages]);
 
   //Load old chat
@@ -82,7 +82,7 @@ export const Chat = ({ chatTarget, onBack }) => {
 
   return (
     // <section className=" bg-linear-to-r from-slate-900 to-slate-700 flex-3 flex flex-col   justify-between overflow-y-auto">
-    <section className="bg-linear-to-r from-slate-900 to-slate-700 flex-3 flex flex-col h-full">
+    <section className="bg-linear-to-r from-slate-900 to-slate-700  flex flex-1 flex-col h-full">
       <div className="sticky top-0 bg-gray-600 p-1 flex justify-between ">
         <h1 className="text-2xl text-white  text-center  px-3">
           {chatTarget?.fullName}
@@ -111,6 +111,7 @@ export const Chat = ({ chatTarget, onBack }) => {
                   src={message.image}
                   alt="sent"
                   className="mt-1 rounded-md max-w-70 sm:max-w-[320px] md:max-w-85 w-full object-contain"
+                  loading="lazy"
                 />
               )}
             </li>

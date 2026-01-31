@@ -11,7 +11,7 @@ const Navbar = () => {
   // console.log("authUser", authUser);
 
   return (
-    <div className="px-2 sm:px-4 py-3 bg-blue-800 flex items-center text-xl  ">
+    <div className="px-2 sm:px-4 py-3 bg-blue-800 flex items-center  text-xl  max-h-18 ">
       {/* Left section */}
       <div className="flex-1 flex items-center gap-2">
         {authUser && (
